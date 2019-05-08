@@ -74,6 +74,28 @@ if [[ $RETRY == $RETRY_MAX ]]; then
   exit 1
 fi
 
+# Configure Jenkins with GitHub credentials
+RETRY=0; RETRY_MAX=12; 
+
+while [[ $RETRY -lt $RETRY_MAX ]]; do
+  curl -X POST http://$JENKINS_URL/configSubmit \
+    --user $JENKINS_USER:$JENKINS_PASSWORD \
+
+  if [[ $? == '0' ]]
+  then
+    print_debug "Config in Jenkins submitted, continue installation."
+    break
+  fi
+  RETRY=$[$RETRY+1]
+  print_debug "Retry: ${RETRY}/${RETRY_MAX} - Wait 10s for submitting config in Jenkins ..."
+  sleep 10
+done
+
+if [[ $RETRY == $RETRY_MAX ]]; then
+  print_error "Config could not be submitted in Jenkins."
+  exit 1
+fi
+
 # Create secret and deploy jenkins-service
 kubectl create secret generic -n keptn jenkins-secret --from-literal=jenkinsurl="jenkins.keptn.svc.cluster.local" --from-literal=user="$JENKINS_USER" --from-literal=password="$JENKINS_PASSWORD"
 verify_kubectl $? "Creating secret for jenkins-service failed."
