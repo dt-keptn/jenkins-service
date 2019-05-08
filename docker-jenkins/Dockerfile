@@ -100,7 +100,7 @@ google-oauth-plugin:0.8 \
 google-source-plugin:0.3 \
 performance:3.16 \
 performance-signature-dynatracesaas:3.1.3 \
-performance-signature-ui:3.1.1 \
+performance-signature-ui:3.1.3 \
 github-branch-source:2.5.1
 
 RUN cp -R /tmp/jobs/* "$JENKINS_HOME"/jobs/
