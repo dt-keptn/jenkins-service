@@ -773,7 +773,7 @@
       <addMasterProxyEnvVars>false</addMasterProxyEnvVars>
       <capOnlyOnAlivePods>false</capOnlyOnAlivePods>
       <namespace>keptn</namespace>
-      <jenkinsUrl></jenkinsUrl>
+      <jenkinsUrl> </jenkinsUrl>
       <jenkinsTunnel>jenkins.keptn.svc.cluster.local:50000</jenkinsTunnel>
       <containerCap>10</containerCap>
       <retentionTimeout>5</retentionTimeout>

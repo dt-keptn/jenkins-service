@@ -47,10 +47,10 @@ COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groov
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.138.4}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.164.2}
 
 # jenkins.war checksum, download will be validated using it
-ARG JENKINS_SHA=053d2941d558092c934a0f95798ff2177170eecfffab27a46e30744cf12bc3da
+ARG JENKINS_SHA=c851b603e3d320295eed671fde7c661209645c818da9b7564caee8371e52bede
 
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
@@ -90,18 +90,18 @@ COPY install-plugins.sh /usr/local/bin/install-plugins.sh
 RUN chmod 755 /usr/local/bin/install-plugins.sh
 
 RUN /usr/local/bin/install-plugins.sh \
-kubernetes:1.12.6 \
-kubernetes-credentials-provider:0.10 \
+kubernetes:1.15.3 \
+kubernetes-credentials-provider:0.12.1 \
 workflow-job:2.31 \
 workflow-aggregator:2.6 \
-credentials-binding:1.16 \
-git:3.9.1 \
-google-oauth-plugin:0.6 \
+credentials-binding:1.18 \
+git:3.10.0 \
+google-oauth-plugin:0.8 \
 google-source-plugin:0.3 \
-performance:3.12 \
-performance-signature-dynatracesaas:3.1.1 \
+performance:3.16 \
+performance-signature-dynatracesaas:3.1.3 \
 performance-signature-ui:3.1.1 \
-github-branch-source:2.4.1
+github-branch-source:2.5.1
 
 RUN cp -R /tmp/jobs/* "$JENKINS_HOME"/jobs/
 RUN ls "$JENKINS_HOME"/jobs/
