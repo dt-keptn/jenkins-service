@@ -31,23 +31,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: jenkins-secret
-                  key: password         
----
-apiVersion: eventing.knative.dev/v1alpha1
-kind: Subscription
-metadata:
-  name: jenkins-evaluation-done-subscription
-  namespace: keptn
-spec:
-  channel:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Channel
-    name: evaluation-done
-  subscriber:
-    ref:
-      apiVersion: serving.knative.dev/v1alpha1
-      kind: Service
-      name: jenkins-service
+                  key: password
 #---
 #apiVersion: eventing.knative.dev/v1alpha1
 #kind: Subscription
